@@ -9,6 +9,13 @@ import java.net.URISyntaxException
 
 
 public class RemoteDataSource private constructor(val repo: MessageRepository) : DataSource {
+    override fun loadMessage(callback: DataSource.LoadMessageCallback) {
+
+    }
+
+    override fun loadChatRooms(userID: String, callback: DataSource.LoadChatRoomCallback) {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
 
 
     private val mEventService = EventServiceImpl
@@ -40,7 +47,7 @@ public class RemoteDataSource private constructor(val repo: MessageRepository) :
     }
 
     override fun setEventListener(eventListener: EventListener) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        mRepoEventListener = eventListener
     }
 
     override fun onConnect(vararg args: Any) {
