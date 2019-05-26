@@ -7,6 +7,14 @@ import io.reactivex.Flowable
 
 
 public class LocalDataSource private constructor(val repo: MessageRepository) : DataSource {
+    override fun saveMessage(message: Message) {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun getMessages(): Flowable<List<Message>> {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
     override fun connect(userId: String) {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }

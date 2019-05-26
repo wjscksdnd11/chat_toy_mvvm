@@ -22,10 +22,12 @@ interface DataSource : EventListener {
 
     fun loadChatRooms(userID:String,callback: LoadChatRoomCallback)
 
+    fun getMessages():Flowable<List<Message>>
     interface LoadMessageCallback {
         fun onSuccess(message: List<Message>)
         fun onFail()
     }
+    fun saveMessage(message:Message)
 
     interface LoadChatRoomCallback{
         fun onSuccess(rooms:List<ChatRoom>)

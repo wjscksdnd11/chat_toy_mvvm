@@ -8,7 +8,15 @@ import com.example.chattoy.service.EventServiceImpl
 import java.net.URISyntaxException
 
 
-public class RemoteDataSource private constructor(val repo: MessageRepository) : DataSource {
+ class RemoteDataSource private constructor(val repo: MessageRepository) : DataSource {
+    override fun saveMessage(message: Message) {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun getMessages(): Flowable<List<Message>> {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
     override fun loadMessage(callback: DataSource.LoadMessageCallback) {
 
     }

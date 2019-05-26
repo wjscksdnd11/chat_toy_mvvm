@@ -7,7 +7,21 @@ import com.example.chattoy.data.entities.Message
 import com.example.chattoy.service.EventListener
 import io.reactivex.Flowable
 
-class MessageRepository(private val remoteDataSource: RemoteDataSource, private val localDataSource: LocalDataSource): DataSource{
+class MessageRepository(private val remoteDataSource: RemoteDataSource, private val localDataSource: LocalDataSource) : DataSource {
+
+    var cacheIsDirty =false
+
+    override fun saveMessage(message: Message) {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+    override fun getMessages(): Flowable<List<Message>> {
+        return localDataSource
+                .getMessages()
+                .doOnComplete{
+                    cacheIsDirty = false
+                }
+    }
+
     init {
         remoteDataSource.setEventListener(this)
     }
@@ -17,7 +31,7 @@ class MessageRepository(private val remoteDataSource: RemoteDataSource, private 
     }
 
     override fun loadChatRooms(userID: String, callback: DataSource.LoadChatRoomCallback) {
-        localDataSource.loadChatRooms(userID,callback)
+        localDataSource.loadChatRooms(userID, callback)
     }
 
 
@@ -30,7 +44,7 @@ class MessageRepository(private val remoteDataSource: RemoteDataSource, private 
     }
 
     override fun sendMessage(message: Message): Flowable<Message> {
-       return remoteDataSource.sendMessage(message)
+        return remoteDataSource.sendMessage(message)
     }
 
     override fun setEventListener(eventListener: EventListener) {
