@@ -1,18 +1,19 @@
-package com.example.chattoy.service
+package com.example.chattoy.data
 
 import com.example.chattoy.data.entities.Message
+import com.example.chattoy.service.EventListener
 import io.reactivex.Flowable
 import java.net.URISyntaxException
 
 
-interface EventService{
+public interface DataSource : EventListener {
+
     @Throws(URISyntaxException::class)
-    fun connect(userId: String)
+    fun connect(username: String)
 
     fun disconnect()
 
     fun sendMessage(message: Message): Flowable<Message>
 
     fun setEventListener(eventListener: EventListener)
-
 }
