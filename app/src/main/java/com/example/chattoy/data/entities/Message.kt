@@ -15,4 +15,5 @@ data class Message(@PrimaryKey var messageId:String,
                    @NotNull  var roomId:String,
                    var createAt: Date) {
     var isRead: Boolean = false
+    var isSender:Boolean = false
 }

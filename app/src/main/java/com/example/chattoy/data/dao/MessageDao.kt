@@ -1,14 +1,18 @@
 package com.example.chattoy.data.dao
 
-import android.os.Message
+import androidx.annotation.NonNull
 import androidx.lifecycle.LiveData
-import androidx.room.Dao
-import androidx.room.Query
-import com.example.chattoy.data.entities.ChatRoom
+import androidx.room.*
+import com.example.chattoy.data.entities.Message
 
 @Dao
 interface MessageDao {
     @Query("SELECT * FROM messages WHERE roomId = :roomId ORDER BY datetime(createAt) DESC")
     fun getMessages(roomId:String):LiveData<List<Message>>
 
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun addMessage(@NonNull message: Message)
+
+    @Update
+    fun updateRead(@NonNull message:Message)
 }
