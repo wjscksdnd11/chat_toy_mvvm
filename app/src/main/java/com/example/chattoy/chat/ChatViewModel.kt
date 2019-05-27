@@ -26,10 +26,7 @@ class ChatViewModel(private val repo: MessageRepository, private val mSchedulerP
         val disposable = repo.getMessages()
                 .subscribeOn(mSchedulerProvider.io())
                 .observeOn(mSchedulerProvider.ui())
-                .doFinally {
-
-
-                }.subscribe { messages ->
+                .subscribe { messages ->
                     _items.value = messages
                 }
         mCompositeDisposable.add(disposable)
